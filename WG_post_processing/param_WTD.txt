@@ -1,0 +1,32 @@
+!Station Information
+Station:  MEMU
+!
+!Simulation horizon
+StartYear:                 2013
+StartDayOfYear(3digit):    60
+EndYear:                   2013
+EndDayOfYear:              304
+!
+!Prediction horizon
+StartYear:                 2013
+StartMonth:                 4
+EndYear:                   2013
+EndMonth:                   6
+!
+!Number of Realizations - Weather genertions
+nRealz:                      100
+!
+Seasonal_climate_forecasts:
+Below_Normal:           33
+Near_Normal:            34
+Above_Normal:           33
+!
+!Flag for target forecast (Rainfall amount, frequency, intensity)
+!e.g. combination of frequency and intensity(1/0=select/no-select)=>011
+Flag:                      100
+!
+!Simulation mode (hindercast(1) or forecst(0)?)
+mode:                      0
+!
+!Working directory where *.WTD, *.CLI can be found
+Directory: C:\IRI\PH\CAMDT\predict_WTD\predWTD_sub\predWTD_sub
