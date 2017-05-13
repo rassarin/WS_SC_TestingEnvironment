@@ -1,0 +1,35 @@
+<predictWTD>
+	<Station>
+		MEMU
+	</Station>
+	<SimulationHorizon>
+		<StartDate>
+			<Year> 2012 </Year>
+			<DOY> 250 </DOY>
+		</StartDate>
+		<EndDate>
+			<Year> 2013 </Year>
+			<DOY> 180 </DOY>
+		</EndDate>
+	</SimulationHorizon>
+	<PredictionHorizon>
+		<StartDate>
+			<Year> 2012 </Year>
+			<Month> 11 </Month>
+		</StartDate>
+		<EndDate>
+			<Year> 2013 </Year>
+			<Month> 1 </Month>
+		</EndDate>
+	</PredictionHorizon>
+	<NumberOfRealization>
+		100
+	</NumberOfRealization>
+	<Forecast>
+		<RainfallAmount> Yes </RainfallAmount>
+		<RainfallFrequency> Yes </RainFrequency>
+		<RainfallIntensity> Yes </RainfallIntensity>
+	<SimulationMode>
+		Hindercast
+	<SimulationMode>
+</predictWTD>

@@ -1,8 +1,10 @@
 __author__ = 'RassarinPro'
-# Generation Date: 16 Oct 2015
-# Scenario 6 We are assuming that user want to get weather scenario by calling weather generator service directly
-# Internal mechanism is calling weather history service then runing weather generator service
-# Monthly smoothing and snow adjustment is applied
+# Generation Date: 15 Oct 2015
+# Modified: 26 Jan 2016
+# Post Service of weather scenario
+# Scenario 5 Apply monthly trend 2 WTD
+# We are assuming that user want to get weather scenario by calling weather generator service directly
+# Internal machanism is calling weather history service then runing weather generator service
 
 #   Input
 #       CLI file ( This file will be returned from historical weather service (Tesla) )
@@ -22,7 +24,6 @@ __author__ = 'RassarinPro'
 #       genWTD is used to generate WTD file.
 #           The output from WeatherQuery program is extracted and formatted.
 #       monthlyTrend2WTD is used to adjust step of data between month and month in WTD file
-#       adjustWTD4Snow is used to adjust snow effect for wheat
 #   Final result
 #       WTD file for weather scenario. File name will be same as the first four characters PRM file
 
@@ -31,7 +32,7 @@ __author__ = 'RassarinPro'
 import os
 
 
-locationName = "MEMU"
+locationName = "AAAA"
 
 
 
@@ -39,12 +40,12 @@ workingDir = '/Users/RassarinPro/Documents/Workspace/WeatherGen/WS_SC_TestingEnv
 #User input parameters for querying historical weather data
 #   Parameter for generating MTH file. It is a time window of weather scenario
 # 42.900  143.050
-targetLatitude = "42.901"
-targetLongitude = "143.051"
-startScenarioYear = "2014"
-startScenarioMonth = "01"
-stopScenarioYear = "2014"
-stopScenarioMonth = "12"
+targetLatitude = "34.845"
+targetLongitude = "137.217"
+startScenarioYear = "2016"
+startScenarioMonth = "02"
+stopScenarioYear = "2016"
+stopScenarioMonth = "11"
 numScenario = "10"
 
 
@@ -101,13 +102,10 @@ print("./Disag " +paramOutput +" " +seasonalForecast +" " +numScenario)
 print("DONE FOR STEP 4")
 # smoothing step of data between month and month by monthlyTrend2WTD
 
-#Step 5: monthly smoothing and following by snow adjustment
+#Step 5: monthly smoothing
 # Create directory for keeping adjusted files
 adjWTDDir = workingDir+"adjWTD/"
 os.mkdir(adjWTDDir)
-
-adjSnowDir = workingDir+"adjSnow/"
-os.mkdir(adjSnowDir)
 
 totalRun = int(numScenario)+1
 
@@ -115,5 +113,3 @@ for i in range(1, totalRun):
         formatNum = '%04d' %i
         os.system(r"./monthlyTrend2WTD.a " +paramOutput +" " +locationName+formatNum+".WTD" +" " +adjWTDDir+locationName+formatNum+".WTD")
         print("./monthlyTrend2WTD.a " +paramOutput +" " +locationName+"000"+str(i)+".WTD" +" " +adjWTDDir+locationName+formatNum+".WTD")
-        os.system(r"./adjustWTD4Snow.a " +adjWTDDir+locationName+formatNum+".WTD" +" " +adjSnowDir+locationName+formatNum+".WTD")
-        print("./adjustWTD4Snow.a " +adjWTDDir+locationName+formatNum+".WTD" +" " +adjSnowDir+locationName+formatNum+".WTD")

@@ -1,6 +1,8 @@
 __author__ = 'RassarinPro'
 # Generation Date: 17 September 2015
+# Modified: 26 Jan 2016
 # Scenario 2 Generating Weather Scenarios based on
+#   Description: User provides cli file, WTD file (historical), and time window for weather scenario
 #   Input
 #       CLI file ( is prepared by USER )
 #       WTD file ( is prepared by USER )
@@ -20,18 +22,25 @@ __author__ = 'RassarinPro'
 
 import os
 
-stationMetadata = "MEMU.CLI"
-histWeatherWTD = "MEMU.WTD"
-seasonalForecast = "MEMU.MTH"
-paramOutput = "MEMU.PRM"
+# Service Parameters
+# User provide CLI and WTD (historical)
+stationName = "MEMU"
+stationMetadata = stationName+".CLI"
+histWeatherWTD = stationName+".WTD"
 numScenario = "10"
 
-#User input parameters
+
 #   Parameter for generating MTH file. It is a time window of weather scenario
 startYear = "2014"
 startMonth = "01"
 stopYear = "2014"
 stopMonth = "12"
+
+#   Output file of step 1
+paramOutput = stationName+".PRM"
+#   Output file of step 2
+seasonalForecast = stationName+".MTH"
+
 
 #Step 1: execute EstimatePrm program
 #   Input argument CLI file, WTD file

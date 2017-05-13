@@ -1,7 +1,7 @@
 *CLIMATE:MEMU
 
 @ INSI      LAT     LONG  ELEV   TAV   AMP  SRAY  TMXY  TMNY  RAIY
-  MEMU   34.845  137.217   300   6.0  14.8  11.4  11.5   0.5   959
+  MEMU   42.900  143.050   300   6.0  14.8  11.4  11.5   0.5   959
 @START  DURN  ANGA  ANGB REFHT WNDHT SOURCE
   1977    35  0.25  0.50 -99.0 -99.0 Calculated_from_daily_data
 @ GSST  GSDU

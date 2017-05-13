@@ -1,7 +1,8 @@
 __author__ = 'RassarinPro'
 # Generation Date: 10 Oct 2015
-# Scenario 3 User want to request historical data based on time window and specific location
-
+# Modified: 26 Jan 2016
+# Scenario 4 User want to request historical data based on time window and specific location
+#   Description: User specify target area in lat and long, radius , historical weather time window and weather scenario time window
 #   Input
 #       CLI file ( This file will be returned from historical weather service (Tesla) )
 #       WTD file ( This file will be returned from historical weather service (Tesla) )
@@ -26,39 +27,19 @@ __author__ = 'RassarinPro'
 
 import os
 
-locationName = "MEMU"
-
-
-
-
-#User input parameters for querying historical weather data
-#   Parameter for generating MTH file. It is a time window of weather scenario
-# 42.900  143.050
+# Service Parameter
 targetLatitude = "42.901"
 targetLongitude = "143.051"
-
+# radius distance in meter
+radiusDistance = "1000"
 # Default of starting date can be beginning of data from that station
 startHistoricalYear = ""
 startHistoricalMonth = ""
 startHistoricalDate = ""
-
-# Default of ending date can be beginning of data from that station
+# Default of ending date can be latest data from that station
 endHistoricalYear = ""
 endHistoricalMonth = ""
 endHistoricalDate = ""
-
-
-#Step 1: query historical weather data
-# call tesla service for getting historical weather data (WTD) and weather station metadata (CLI)
-# start from the beginning of available data in the station up to present
-histWeatherWTD = locationName+".WTD"
-stationMetadata = locationName+".CLI"
-
-
-
-# ----------------------------------------------------------------------------------------
-
-#User input parameters for running weather generation for getting weather scenario
 
 startScenarioYear = "2014"
 startScenarioMonth = "01"
@@ -66,17 +47,28 @@ stopScenarioYear = "2014"
 stopScenarioMonth = "12"
 numScenario = "10"
 
+# assuming that
+locationName = "MEMU"
+
+
+#Step 1: call service for generating historical weather data and CLI file
+# call tesla service for getting historical weather data (WTD) and weather station metadata (CLI)
+# start from the beginning of available data in the station up to present
+# generated WTD file
+histWeatherWTD = locationName+".WTD"
+# generate CLI file from weather station metadata
+stationMetadata = locationName+".CLI"
+
+# ----------------------------------------------------------------------------------------
+
+
 #Step 2: execute EstimatePrm program
 #   Input argument CLI file, WTD file
 #   Output PRM file
 
 
-
-#   Prepare blank files
-seasonalForecast = locationName+".MTH"
-paramOutput = locationName+".PRM"
 #   Filename will be named as first four characters of CLI filename
-
+paramOutput = locationName+".PRM"
 os.system(r"./EstimatePrm " +stationMetadata +" " +histWeatherWTD)
 print("running: ")
 print("./EstimatePrm " +stationMetadata +" " +histWeatherWTD)
@@ -84,6 +76,9 @@ print("./EstimatePrm " +stationMetadata +" " +histWeatherWTD)
 #Step 3: execute genMth program
 #   Input argument startYear, startMonth, stopYear, stopMonth, outputfile
 #   Output MTH file
+
+#   Prepare blank files for
+seasonalForecast = locationName+".MTH"
 os.system(r"./genMth " +startScenarioYear +" " +startScenarioMonth+" " +stopScenarioYear +" " +stopScenarioMonth + " " + ">" + " " +seasonalForecast)
 print("running: ")
 print("./genMth " +startScenarioYear +" " +startScenarioMonth+" " +stopScenarioYear +" " +stopScenarioMonth + " " + ">" + " " +seasonalForecast)
